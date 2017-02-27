@@ -119,7 +119,7 @@ public class MSButton
     public int countBombs(int row, int col)
     {
         int numBombs = 0;
-        
+        if ()
         return numBombs;
     }
 }
