@@ -26,14 +26,17 @@ void setup ()
 public void setBombs()
 {
     //int test = 0;
-    int row = (int)(Math.random()*20);
-    int column = (int)(Math.random()*20);
+    int row;
+    int column;
     for (int i = 0; i < 50; i++){
+        row = (int)(Math.random()*20);
+        column = (int)(Math.random()*20);
         if (!bombs.contains(buttons[row][column]))
-            bombs.add(buttons[row][column]);
+            {bombs.add(buttons[row][column]);}
             //test++;
+    //System.out.println(row + "," + column);    
     }
-    //System.out.println(test);
+
 }
 
 public void draw ()
@@ -88,7 +91,16 @@ public class MSButton
     public void mousePressed () 
     {
         clicked = true;
-        //your code here
+        if (keyPressed == true && marked == false)
+            marked = true;
+        if (keyPressed == true && marked == true)
+            marked = clicked = false;
+        else if (bombs.contains(this))
+            text("YOU LOSE!", 100,100);
+        else if (countBombs(r, c) > 0)
+            text(countBombs(r,c), 20*c, 20*r);
+        else 
+            mousePressed();
     }
 
     public void draw () 
@@ -119,7 +131,23 @@ public class MSButton
     public int countBombs(int row, int col)
     {
         int numBombs = 0;
-        if ()
+        if (isValid(r+1,c) && bombs.contains(buttons[r+1][c]))
+            numBombs++;
+        if (isValid(r+1,c+1) && bombs.contains(buttons[r+1][c+1]))
+            numBombs++;
+        if (isValid(r+1,c-1) && bombs.contains(buttons[r+1][c-1]))
+            numBombs++;
+        if (isValid(r,c+1) && bombs.contains(buttons[r][c+1]))
+            numBombs++;
+        if (isValid(r,c-1) && bombs.contains(buttons[r][c-1]))
+            numBombs++;
+        if (isValid(r-1,c-1) && bombs.contains(buttons[r-1][c-1]))
+            numBombs++;
+        if (isValid(r-1,c) && bombs.contains(buttons[r-1][c]))
+            numBombs++;
+        if (isValid(r-1,c+1) && bombs.contains(buttons[r-1][c+1]))
+            numBombs++;
+        
         return numBombs;
     }
 }
