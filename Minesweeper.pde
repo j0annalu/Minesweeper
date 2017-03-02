@@ -52,7 +52,8 @@ public boolean isWon()
 }
 public void displayLosingMessage()
 {
-    //your code here
+    fill(255,0,0);
+    text("YOU LOSE", 200, 200);
 }
 public void displayWinningMessage()
 {
@@ -95,13 +96,32 @@ public class MSButton
             marked = true;
         if (keyPressed == true && marked == true)
             marked = clicked = false;
-        else if (bombs.contains(this))
-            text("YOU LOSE!", 100,100);
+        else if (bombs.contains(buttons[r][c]))
+            {
+                displayLosingMessage();
+            }
         else if (countBombs(r, c) > 0)
-            text(countBombs(r,c), 20*c, 20*r);
+            setLabel(""+countBombs(r,c));
         else 
-            mousePressed();
+            {
+                if (isValid(r+1,c) && !!bombs.contains(buttons[r+1][c]))
+                    mousePressed();
+                if (isValid(r+1,c+1) && !bombs.contains(buttons[r+1][c+1]))
+                    mousePressed();
+                if (isValid(r+1,c-1) && !bombs.contains(buttons[r+1][c-1]))
+                    mousePressed();
+                if (isValid(r,c+1) && !bombs.contains(buttons[r][c+1]))
+                    mousePressed();
+                if (isValid(r,c-1) && !bombs.contains(buttons[r][c-1]))
+                    mousePressed();
+                if (isValid(r-1,c-1) && !bombs.contains(buttons[r-1][c-1]))
+                    mousePressed();
+                if (isValid(r-1,c) && !bombs.contains(buttons[r-1][c]))
+                    mousePressed();
+                if (isValid(r-1,c+1) && !bombs.contains(buttons[r-1][c+1]))
+                    mousePressed();
     }
+}
 
     public void draw () 
     {    
