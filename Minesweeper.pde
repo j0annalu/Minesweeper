@@ -104,7 +104,7 @@ public class MSButton
             setLabel(""+countBombs(r,c));
         else 
             {
-                if (isValid(r+1,c) && !!bombs.contains(buttons[r+1][c]))
+                if (isValid(r+1,c) && !bombs.contains(buttons[r+1][c]))
                     mousePressed();
                 if (isValid(r+1,c+1) && !bombs.contains(buttons[r+1][c+1]))
                     mousePressed();
