@@ -22,17 +22,21 @@ void setup ()
         }
     }
         setBombs();
+        System.out.println(buttons[19][19].isValid(19,20));
 }
 public void setBombs()
 {
     //int test = 0;
     int row;
     int column;
-    for (int i = 0; i < 50; i++){
+    for (int i = 0; i < 3; i++){
         row = (int)(Math.random()*20);
         column = (int)(Math.random()*20);
         if (!bombs.contains(buttons[row][column]))
+        {
             {bombs.add(buttons[row][column]);}
+            System.out.println(row + ", " + column);
+        }
             //test++;
     //System.out.println(row + "," + column);    
     }
@@ -104,22 +108,31 @@ public class MSButton
             setLabel(""+countBombs(r,c));
         else 
             {
+                System.out.println(r + ", " + c);
                 if (isValid(r+1,c) && !bombs.contains(buttons[r+1][c]))
-                    mousePressed();
+                    buttons[r+1][c].mousePressed();
+                System.out.println("after first if");
                 if (isValid(r+1,c+1) && !bombs.contains(buttons[r+1][c+1]))
-                    mousePressed();
+                    buttons[r+1][c+1].mousePressed();
+                System.out.println("after second if");
                 if (isValid(r+1,c-1) && !bombs.contains(buttons[r+1][c-1]))
-                    mousePressed();
+                    buttons[r+1][c-1].mousePressed();
+                System.out.println("after third if");
                 if (isValid(r,c+1) && !bombs.contains(buttons[r][c+1]))
-                    mousePressed();
+                    buttons[r][c+1].mousePressed();
+                System.out.println("after fourth if");
                 if (isValid(r,c-1) && !bombs.contains(buttons[r][c-1]))
-                    mousePressed();
+                    buttons[r][c-1].mousePressed();
+                System.out.println("after fifth if");
                 if (isValid(r-1,c-1) && !bombs.contains(buttons[r-1][c-1]))
-                    mousePressed();
+                    buttons[r-1][c-1].mousePressed();
+                System.out.println("after sixth if");
                 if (isValid(r-1,c) && !bombs.contains(buttons[r-1][c]))
-                    mousePressed();
+                    buttons[r-1][c].mousePressed();
+                System.out.println("after seventh if");
                 if (isValid(r-1,c+1) && !bombs.contains(buttons[r-1][c+1]))
-                    mousePressed();
+                    buttons[r-1][c+1].mousePressed();
+                System.out.println("after eighth if");
     }
 }
 
@@ -144,11 +157,11 @@ public class MSButton
     }
     public boolean isValid(int r, int c)
     {
-        if(r >= 0 && r <= NUM_ROWS && c >= 0 && c <= NUM_COLS)
+        if(r >= 0 && r < NUM_ROWS && c >= 0 && c < NUM_COLS)
             return true;
         return false;
     }
-    public int countBombs(int row, int col)
+    public int countBombs(int r, int c)
     {
         int numBombs = 0;
         if (isValid(r+1,c) && bombs.contains(buttons[r+1][c]))
