@@ -51,17 +51,38 @@ public void draw ()
 }
 public boolean isWon()
 {
-    //your code here
-    return false;
+    for (int j = 0; j < NUM_ROWS; j++){
+        for (int i = 0; i < NUM_COLS; i++){
+            if (!bombs.contains(buttons[j][i]) && buttons[j][i].isClicked() == false)
+                return false;
+        }
+    }
+    return true;
 }
+
 public void displayLosingMessage()
 {
-    fill(255,0,0);
-    text("YOU LOSE", 200, 200);
+    String[] m = {"Y","O","U", " ", "L", "O", "S", "E", "!"};
+    for (int j = 0; j < NUM_ROWS; j++){
+        for (int i = 0; i < NUM_COLS; i++){
+            buttons[j][i].setLabel(""); 
+        }
+    }
+    for (int i = 0; i < m.length; i++){
+        buttons[10][i+5].setLabel(m[i]); 
+    }
 }
 public void displayWinningMessage()
 {
-    //your code here
+    String[] m = {"Y","O","U", " ", "W", "I", "N", "!"};
+    for (int j = 0; j < NUM_ROWS; j++){
+        for (int i = 0; i < NUM_COLS; i++){
+            buttons[j][i].setLabel(""); 
+        }
+    }
+    for (int i = 0; i < m.length; i++){
+        buttons[10][i+5].setLabel(m[i]); 
+    }
 }
 
 public class MSButton
